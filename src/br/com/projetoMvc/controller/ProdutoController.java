@@ -3,6 +3,8 @@ package br.com.projetoMvc.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import br.com.projetoMvc.DAO.GenericDAO;
 import br.com.projetoMvc.DAO.ProdutoDAOImpl;
 import br.com.projetoMvc.model.Produto;
@@ -26,6 +28,19 @@ public class ProdutoController {
 		}
 		
 		return listaProdutos;
+	}
+	
+	public void cadastrar(Produto produto) {
+		try {
+			GenericDAO dao = new ProdutoDAOImpl();
+			if (dao.cadastrar(produto)) {
+				JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+			} else {
+				JOptionPane.showMessageDialog(null, "Problemas ao cadastrar produto.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
