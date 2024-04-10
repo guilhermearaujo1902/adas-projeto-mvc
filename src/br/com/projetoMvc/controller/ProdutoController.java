@@ -53,5 +53,16 @@ public class ProdutoController {
 			return null;
 		}
 	}
+	
+	public boolean excluir(int id) {
+		try {
+			GenericDAO dao = new ProdutoDAOImpl();
+			dao.excluir(id);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
 }
