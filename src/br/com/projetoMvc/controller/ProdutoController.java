@@ -43,6 +43,26 @@ public class ProdutoController {
 		}
 	}
 	
+	public void alterar(Produto produto) {
+		try {
+			GenericDAO dao = new ProdutoDAOImpl();
+			
+			if (validarId(produto.getId()) == false) {
+				JOptionPane.showMessageDialog(null, "Nenhum produto encontrado para o ID " + produto.getId());
+				return;
+			}
+			
+			if (dao.alterar(produto) == true) {
+				JOptionPane.showMessageDialog(null, "Produto alterado com sucesso!");
+			} else {
+				JOptionPane.showMessageDialog(null, "Problemas ao alterar produto.");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public Produto listarPorId(int id) {
 		try {
 			GenericDAO dao = new ProdutoDAOImpl();
@@ -58,14 +78,29 @@ public class ProdutoController {
 		try {
 			GenericDAO dao = new ProdutoDAOImpl();
 			
-			Produto produto = (Produto) dao.listarPorId(id);
-			if (produto == null) {
+			if (validarId(id) == false) {
 				return false;
 			}
 			
-			dao = new ProdutoDAOImpl();
 			dao.excluir(id);
 			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	private boolean validarId(int id) {
+		try {
+			GenericDAO dao = new ProdutoDAOImpl();
+			
+			Produto produto = (Produto) dao.listarPorId(id);
+			
+			if (produto == null) {
+				return false;
+			} else {
+				return true;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

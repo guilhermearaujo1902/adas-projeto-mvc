@@ -74,7 +74,14 @@ public class Main {
 				break;
 				
 			case 4:
-				JOptionPane.showMessageDialog(null, "Alterar");
+				int idEditar = Integer.parseInt(JOptionPane.showInputDialog("Qual ID do produto a ser alterado?"));
+				String novaDescricao = JOptionPane.showInputDialog("Digite a nova descrição para o produto.");
+				
+				Produto produtoEditado = new Produto();
+				produtoEditado.setId(idEditar);
+				produtoEditado.setDescricao(novaDescricao);
+				
+				controller.alterar(produtoEditado);
 				break;
 				
 			case 5: //Excluir 
