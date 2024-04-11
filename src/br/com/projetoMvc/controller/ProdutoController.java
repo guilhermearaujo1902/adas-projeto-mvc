@@ -63,6 +63,7 @@ public class ProdutoController {
 				return false;
 			}
 			
+			dao = new ProdutoDAOImpl();
 			dao.excluir(id);
 			return true;
 		} catch (Exception e) {
