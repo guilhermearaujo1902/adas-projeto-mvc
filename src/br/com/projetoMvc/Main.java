@@ -27,6 +27,7 @@ public class Main {
 			opcao = Integer.parseInt(JOptionPane.showInputDialog(menu));
 			
 			switch (opcao) {
+			
 			case 1: // Listar todos
 				List<Produto> lista = new ArrayList<Produto>();
 				lista = controller.listarTodos();
@@ -51,8 +52,8 @@ public class Main {
 				} else {
 					JOptionPane.showMessageDialog(null, "Não existem produtos cadastrados!");
 				}
-				
 				break;
+				
 			case 2:
 				int id = Integer.parseInt(JOptionPane.showInputDialog("Digite o ID a desejado"));
 				Produto produtoEncontrado = controller.listarPorId(id);
@@ -64,21 +65,31 @@ public class Main {
 				}
 				
 				break;
+				
 			case 3: // Cadastrar
 				Produto novoProduto = new Produto();
 				novoProduto.setDescricao(JOptionPane.showInputDialog("Descrição do produto"));
 				
 				controller.cadastrar(novoProduto);
 				break;
+				
 			case 4:
 				JOptionPane.showMessageDialog(null, "Alterar");
 				break;
-			case 5:
-				JOptionPane.showMessageDialog(null, "Excluir");
+				
+			case 5: //Excluir 
+				int idExclusao = Integer.parseInt(JOptionPane.showInputDialog("Qual ID do produto a ser excluído?"));
+				if (controller.excluir(idExclusao)) {
+					JOptionPane.showMessageDialog(null, "Produto excluído com sucesso!");
+				} else {
+					JOptionPane.showMessageDialog(null, "Não foi possível excluir o produto com o ID " + idExclusao);
+				}
 				break;
+				
 			case 0:
 				JOptionPane.showMessageDialog(null, "Saindo do sistema...");
 				break;
+				
 			default:
 				JOptionPane.showMessageDialog(null, "Opção inválida pra o código " + opcao);
 			}

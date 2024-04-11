@@ -57,6 +57,12 @@ public class ProdutoController {
 	public boolean excluir(int id) {
 		try {
 			GenericDAO dao = new ProdutoDAOImpl();
+			
+			Produto produto = (Produto) dao.listarPorId(id);
+			if (produto == null) {
+				return false;
+			}
+			
 			dao.excluir(id);
 			return true;
 		} catch (Exception e) {
